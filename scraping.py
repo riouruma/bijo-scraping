@@ -13,7 +13,7 @@ def download(url):
     localfile.close()
 
 # 月指定
-month = 11
+month = 10
 # 日にち指定
 day = 1
 # shutterstockの画像検索結果を保存
@@ -32,13 +32,15 @@ while day<31:
         img_url = link.get('src')
         print (img_url)
 
-        # ローカルに画像をダウンロード
+        # お休みの日は日付をプラスしてスキップ
         if "holiday" in img_url:
             day += 1
             break
 
         elif "img2.php" in img_url:
             img_url = "http://www.bijogoyomi.com" + img_url
+            # ローカルに画像をダウンロード
             download(img_url)
+            # 次の日を読み込みするようにする
             day += 1
             break
