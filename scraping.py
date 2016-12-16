@@ -12,15 +12,23 @@ def download(url):
     img.close()
     localfile.close()
 
+
+# 年指定
+s = input("year：")
+year = int(s)
 # 月指定
-month = 10
+s = input("month：")
+month = int(s)
 # 日にち指定
-day = 1
+s = input("day：")
+day = int(s)
 # shutterstockの画像検索結果を保存
+
+base_url = "http://www.bijogoyomi.com"
 
 while day<31:
     # アクセス先
-    par_url = 'http://www.bijogoyomi.com/bijo3/index.php/2016/'+ str("{0:02d}".format(month)) + '/' + str("{0:02d}".format(day))
+    par_url = base_url + "/bijo3/index.php/"+str(year) + "/" + str("{0:02d}".format(month)) + '/' + str("{0:02d}".format(day))
     # urlアクセス
     res = request.urlopen(par_url)
     # beautifulsoupでパース
@@ -38,7 +46,7 @@ while day<31:
             break
 
         elif "img2.php" in img_url:
-            img_url = "http://www.bijogoyomi.com" + img_url
+            img_url = base_url + img_url
             # ローカルに画像をダウンロード
             download(img_url)
             # 次の日を読み込みするようにする
